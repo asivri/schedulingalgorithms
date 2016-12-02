@@ -132,7 +132,7 @@ float roundRobin(int quantumNum)
     cout << "Scheduling through Round Robin with the quantum number that given by the user" << endl;
     int i, j;
     //I wrote a dumb code and cheated little bit because, there is no P1 as starter process in the output. That's why
-    //I added it manually. 
+    //I added it manually.
     cout<<"P1, ";
     while(burstTime != 0)
     {
