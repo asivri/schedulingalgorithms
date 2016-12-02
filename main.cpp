@@ -15,7 +15,7 @@ using namespace std;
 //Setting the variables global to make it able to use in different functions
 string processes[5] = {"P1", "P2", "P3", "P4", "P5"};
 int burstTime[5] = {10, 1, 2, 3, 5};
-int priority[5] = {3, 1, 3, 5, 2};
+int priority[5] = {3, 1, 4, 5, 2};
 int waitingTime[5];
 int totalWaiting = 0;
 float averageWaiting;
@@ -56,6 +56,7 @@ int calculateFCFS()
 //I found that we can list burst times using selection sort so I'll implement that in SJF Scheduling.
 float calculteSJF()
 {
+    cout << "Scheduling through Shortest job first (SJF) with highest priority 5" << endl;
  //Sorting burst time
     int index;
     string indexP;
@@ -129,21 +130,66 @@ float calculteSJF()
 float roundRobin(int quantumNum)
 {
     int i, j, k;
-    
 }
+
+int priorityScheduling()
+{
+    cout << "Scheduling through Priority Scheduling" << endl;
+    int i, j, pos, temp;
+    //Process numbers declared here again because it was declared as string previously.
+    int processInt[] = {1, 2, 3, 4, 5};
+
+    // Ordering priorities from smallest to greatest number.
+    for(i = 0; i < 5; i++)
+    {
+        pos=i;
+        for(j=i+1;j<5; j++)
+        {
+            if(priority[j]< priority[pos])
+            pos=j;
+        }
+
+        //Ordering priorities
+        temp=priority[i];
+        priority[i]=priority[pos];
+        priority[pos]=temp;
+
+        //Ordering burst times
+        temp=burstTime[i];
+        burstTime[i]=burstTime[pos];
+        burstTime[pos]=temp;
+
+        //Ordering processes
+        temp=processInt[i];
+        processInt[i]=processInt[pos];
+        processInt[pos]=temp;
+    }
+
+
+    cout<<"Process                Burst Time"<<endl;
+    for(i=0; i<5 ;i++)
+    {
+        cout<<"P"<< processInt[i] <<"                      "<<burstTime[i]<<endl;
+
+    }
+
+}
+
+
 int main() {
 
     calculateFCFS();
     cout<<endl;
     cout<<"*********************************************************************"<<endl;
     cout<<endl;
-    cout << "Scheduling through Shortest job first (SJF) with highest priority 5" << endl;
     calculteSJF();
     cout<<"*********************************************************************"<<endl;
     int quantum;
     cout<<"Please enter a quantum number for Round Robin: ";
     cin>>quantum;
     roundRobin(quantum);
+    cout<<"*********************************************************************"<<endl;
+    priorityScheduling();
     return 0;
 }
 
