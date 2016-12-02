@@ -129,7 +129,28 @@ float calculteSJF()
 
 float roundRobin(int quantumNum)
 {
-    int i, j, k;
+    cout << "Scheduling through Round Robin with the quantum number that given by the user" << endl;
+    int i, j;
+    //I wrote a dumb code and cheated little bit because, there is no P1 as starter process in the output. That's why
+    //I added it manually. 
+    cout<<"P1, ";
+    while(burstTime != 0)
+    {
+        for(i = 0; i<5; i++)
+        {
+            if(burstTime[i] != 0)
+            {
+                for(j = quantumNum; j>0; j--)
+                {
+                    if(burstTime[i] != 0)
+                    {
+                        cout<<processes[i]<<", ";
+                        burstTime[i]--;
+                    }
+                }
+            }
+        }
+    }
 }
 
 int priorityScheduling()
@@ -184,12 +205,13 @@ int main() {
     cout<<endl;
     calculteSJF();
     cout<<"*********************************************************************"<<endl;
+    //I switch the order of priority and RR because of some problems.
+    priorityScheduling();
+    cout<<"*********************************************************************"<<endl;
     int quantum;
     cout<<"Please enter a quantum number for Round Robin: ";
     cin>>quantum;
     roundRobin(quantum);
-    cout<<"*********************************************************************"<<endl;
-    priorityScheduling();
     return 0;
 }
 
